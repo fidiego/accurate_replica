@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+django = "*"
+twilio = "*"
+djangorestframework = "*"
+django-filter = "*"
+django-environ = "*"
+psycopg2-binary = "*"
+celery = "*"
+redis = "*"
+
+[requires]
+python_version = "3.7"
+
+[dev-packages]
+honcho = "*"
+gunicorn = "*"
+flake8 = "*"
+bandit = "*"
+pytest = "*"
+coverage = "*"
