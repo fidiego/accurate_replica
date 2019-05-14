@@ -84,6 +84,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # third party
+    "social_django.middleware.SocialAuthExceptionMiddleware",
 ]
 
 ROOT_URLCONF = "accurate_replica.urls"
@@ -108,6 +110,11 @@ WSGI_APPLICATION = "accurate_replica.wsgi.application"
 
 # User Model
 AUTH_USER_MODEL = "authentication.User"
+
+AUTHENTICATION_BACKENDS = {
+    "django.contrib.auth.backends.ModelBackend",
+    "authentication.auth0backend.Auth0",
+}
 
 # Email configuration
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")

@@ -31,13 +31,13 @@ urlpatterns = [
     path(f"{settings.ADMIN_SITE_URL}/", admin.site.urls),
     # fax handler views
     path("twilio/fax/", include("fax.urls", namespace="fax")),
+    # social auth and such
+    url(r"^", include("social_django.urls", namespace="social")),
+    url(r"^", include((auth_urlpatterns, "auth"))),
     # authentication views
     path("authentication/", include("authentication.urls", namespace="authentication")),
     url("login$", LoginRedirectView.as_view(), name="login"),
     url("logout$", LogoutRedirectView.as_view(), name="logout"),
-    # social auth and such
-    url(r"^", include("social_django.urls", namespace="social")),
-    url(r"^", include((auth_urlpatterns, "auth"))),
     # dashboard views
     url("dashboard/", include("dashboard.urls", namespace="dashboard")),
     # favicon
