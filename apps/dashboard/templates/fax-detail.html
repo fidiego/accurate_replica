@@ -1,0 +1,48 @@
+{% extends 'dashboard-base.html' %}
+
+{% block content %}
+<div class="my-2 h-full">
+    {% if fax.direction == 'inbound' %}
+    <h2 class="font-bold text-2xl">Fax from {{fax.from_number}}</h2>
+    {% else %}
+    <h2 class="font-bold text-2xl">Fax to {{fax.to_number}}</h2>
+    {% endif %}
+
+    <hr/>
+
+    {% if fax.direction == 'outbound' %}
+    <p>
+    <b>Created By: </b> {{fax.created_by.email}}
+    </p>
+    {% endif %}
+
+    <p>
+    <b>Created On: </b> {{fax.created_on}}
+    </p>
+
+
+    {% if fax.content_url %}
+    <div class="my-2 border bg-white">
+        <div class="flex justify-between p-2">
+            <h3 class="font-bold text-xl">
+                <span role="img" aria-label="file">
+                    🗂
+                </span>
+                Contents
+            </h3>
+            <a href="{{fax.content_url}}" target="_blank">direct link to file
+                <span role="img" aria-label="link">
+                    🔗
+                </span>
+            </a>
+        </div>
+        <details>
+            <summary class="px-2 pb-4">
+                View File
+            </summary>
+            <iframe src="{{fax.content_url}}" class="w-full h-full" style="height: 80vh; max-height: 900px"/>
+        </details>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

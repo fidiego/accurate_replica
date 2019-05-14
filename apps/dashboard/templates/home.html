@@ -1,0 +1,48 @@
+{% extends 'dashboard-base.html' %}
+
+{% block content %}
+<div class="my-2 border">
+    <table class="border w-full">
+        <thead>
+            <tr class="font-mono font-bold bg-white">
+                <th class="p-1">ID</th>
+                <th class="p-1">Status</th>
+                <th class="p-1">Direction</th>
+                <th class="p-1">To</th>
+                <th class="p-1">From</th>
+                <th class="p-1">Who</th>
+                <th class="p-1">When</th>
+                <th class="p-1">File</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fax in faxes %}
+            <tr class="font-mono text-sm">
+                <td class="p-1">
+                    <a href="{% url 'dashboard:fax-detail' uuid=fax.uuid %}">{{fax.short_id}}</a>
+                </td>
+                <td class="p-1">{{fax.status}}</td>
+                <td class="p-1">{{fax.direction}}</td>
+                <td class="p-1">{{fax.to_number}}</td>
+                <td class="p-1">{{fax.from_number}}</td>
+                <td class="p-1">{{fax.created_by.email}}</td>
+                <td class="p-1">{{fax.created_on}}</td>
+                <td class="p-1">
+                    {% if fax.content_url %}
+                    <a href="{{fax.content_url}}" target="_blank">
+                        <span role="img" aria-label="ile">
+                            🗂
+                        </span>
+                    </a>
+                    {% else %}
+                        <span role="img" aria-label="ile">
+                            🙁
+                        </span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

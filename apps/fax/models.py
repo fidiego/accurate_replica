@@ -9,6 +9,7 @@ from django.urls import reverse
 import requests
 
 from core.mixins import BaseModelMixin
+from core.formatters import pretty_print_phone_number
 from lazy_clients import LazyLoadedTwilioClient
 
 
@@ -48,6 +49,24 @@ class Fax(BaseModelMixin):
         resource = client.fax.faxes.get(self.sid)
         fax = resource.fetch()
         return fax
+
+    @property
+    def short_id(self):
+        return str(self.uuid)[-8:]
+
+    @property
+    def to_number(self):
+        return pretty_print_phone_number(self._to)
+
+    @property
+    def from_number(self):
+        return pretty_print_phone_number(self._from)
+
+    @property
+    def content_url(self):
+        if self.content:
+            return self.content.url
+        return
 
     def send_fax(self):
         if self.sid:

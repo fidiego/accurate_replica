@@ -1,88 +1,62 @@
-{% extends 'base.html' %}
-{% block headscripts %}
-<style>
-.logo {
-    height: 60px;
-    width: 100%;
-    background-image: url('/static/dl-logo-text.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: left center;
-}
-{% include 'partials/css/particle-network-animation.css' %}
-</style>
-{% endblock headscripts %}
+{% extends 'auth-base.html' %}
 
 {% block content %}
-<div class="w-full md:w-1/3 lg:w-1/4 bg-blue-darker m-0" id="particle-network-animation">
-        <div class="logo m-6">
-        </div>
-    <div class="p-6 sm:pt-6 pt-0 text-white sm:text-base md:text-xl lg:text-xl">
-        <p>
-        Here are some notes. These notes can be reminders, or anything really.
+<div class="container max-w-sm p-6 md:p-8 lg:p-8 mx-auto border rounded-lg bg-gray-300">
+    <h1 class="text-3xl text-teal-900 font-bold">
+        Login
+    </h1>
+    <hr class="border mb-4"/>
+    <form method="POST">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="mb3 pa3 ba b--dashed">
+        <span>{{error}}</span>
         </p>
-    </div>
-</div>
+        {% endfor %}
+        {% endif %}
+        <div class="mb-4">
+            <label class="block text-blue-darkest text-sm font-bold mb-2" for="username">
+                Phone Number
+            </label>
+            <input
+                class="appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+                type="tel"
+                name="username"
+                placeholder="(321) 555 0123"
+                id="id_username"
+                autofocus>
+        </div>
+        <div class="mb-4">
+            <label class="block text-blue-darkest text-sm font-bold mb-2" for="password">
+                Password
+            </label>
+            <input
+                class="appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                type="password"
+                name="password"
+                placeholder="*******"
+                id="id_password">
+        </div>
 
-<div
-    class="w-full md:w-2/3 md:w-3/4 bg-grey-lighter w-screen h-100 xs:h-screen sm:h-screen flex items-center align-center p-0 sm:p-6 m-0">
-    <div class="container max-w-sm p-6 md:p-8 lg:p-8 mx-auto">
-        <h1 class="mb-3 text-blue-darkest">
-            Login
-        </h1>
-        <hr class="border mb-4"/>
-        <form method="POST">
-            {% csrf_token %}
+        <div class="mb-4">
+            <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
+                Sign In
+            </button>
+        </div>
 
-            {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-            <p class="mb3 pa3 ba b--dashed">
-            <span>{{error}}</span>
-            </p>
-            {% endfor %}
-            {% endif %}
-            <div class="mb-4">
-                <label class="block text-blue-darkest text-sm font-bold mb-2" for="username">
-                    Phone Number
-                </label>
-                <input
-                    class="appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
-                    type="tel"
-                    name="username"
-                    placeholder="(321) 555 0123"
-                    id="id_username"
-                    autofocus>
+        <hr/>
+
+        <a href="/login/auth0" class="no-underline">
+            <div class="bg-blue-500 hover:bg-blue-600 text-center text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ">
+                <span role="img" aria-label="envelop-icon">
+                    ✉️&nbsp;&nbsp;
+                </span>
+                Log in with Gmail
             </div>
-            <div class="mb-4">
-                <label class="block text-blue-darkest text-sm font-bold mb-2" for="password">
-                    Password
-                </label>
-                <input
-                    class="appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    type="password"
-                    name="password"
-                    placeholder="*******"
-                    id="id_password">
-            </div>
-
-            <div class="mb-4">
-                <button class="bg-green hover:bg-green-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
-                    Sign In
-                </button>
-            </div>
-
-            <hr/>
-
-            <a href="/login/auth0" class="no-underline">
-                <div class="bg-blue hover:bg-blue-dark text-center text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ">
-                    <span role="img" aria-label="envelop-icon">
-                        ✉️&nbsp;&nbsp;
-                    </span>
-                    Log in with Gmail
-                </div>
-            </a>
-        </form>
-    </div>
+        </a>
+    </form>
 </div>
 {% endblock content %}
 
@@ -96,14 +70,6 @@
         // clear session storage
         console.log('clearing session storage')
         sessionStorage.clear();
-        // clear cookies
-        console.log('clearing cookies')
-        var cookies = document.cookie.split(";");
-        document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
     })()
-</script>
-
-<script>
-    {% include 'partials/js/particle-network-animation.js' %}
 </script>
 {% endblock end_scripts %}

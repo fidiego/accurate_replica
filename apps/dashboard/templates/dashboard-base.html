@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>{{title|default:'Dashboard'}} | Accurate Replica</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    {% block headscripts %}{% endblock headscripts %}
+
+    <body class="sans-serif bg-gray-200 p-0 m-0 w-screen h-screen">
+        <nav class="flex items-center justify-between flex-wrap bg-teal-700 p-6">
+            <div class="container max-w-6xl w-full mx-auto flex">
+                <div class="flex items-center flex-shrink-0 text-white mr-6">
+                    <a href="/dashboard">
+                    <span class="font-semibold text-xl tracking-tight">Accurate Replica</span>
+                    </a>
+                </div>
+                <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+                    <div class="text-sm lg:flex-grow">
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            New Fax
+                        </a>
+                        {% if request.user.is_superuser %}
+                        <a href="{% url 'admin:index' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4" target="_blank">
+                           Admin Site
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="max-w-6xl mx-auto">
+            {% block content %}{% endblock content %}
+        </main>
+        {% block end_scripts %}{% endblock end_scripts %}
+    </body>
+</html>

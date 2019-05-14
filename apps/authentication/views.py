@@ -17,8 +17,6 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import View
 
-from rest_framework.renderers import JSONRenderer
-
 from authentication.forms import (
     PhoneNumberLoginForm,
     EmailLoginForm,
