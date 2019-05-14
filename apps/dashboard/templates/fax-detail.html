@@ -9,6 +9,19 @@
     {% endif %}
 
     <hr/>
+    <p>
+    <b>Status: </b> {{fax.status}}
+    </p>
+
+    {% if fax.error_message %}
+    <p class="text-red-700">
+    <b>Error Message: </b>
+    <span>
+        ⚠️
+    </span>
+    {{fax.error_message}}
+    </p>
+    {% endif %}
 
     {% if fax.direction == 'outbound' %}
     <p>

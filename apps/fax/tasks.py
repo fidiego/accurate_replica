@@ -9,3 +9,9 @@ from fax.models import Fax
 def _receive_fax(uuid):
     fax = Fax.objects.get(uuid=uuid)
     fax.receive_fax()
+
+
+@shared_task
+def _send_fax(uuid):
+    fax = Fax.objects.get(uuid=uuid)
+    fax.send_fax()

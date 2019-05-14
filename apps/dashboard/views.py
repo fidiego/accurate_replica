@@ -1,8 +1,10 @@
+import logging
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 
 from fax.models import Fax
+from fax.forms import OutboundFaxForm
 
 
 class DashboardHomeRedirectView(View):
@@ -24,3 +26,17 @@ class FaxDetail(View):
     def get(self, request, uuid):
         fax = Fax.objects.get(uuid=uuid)
         return render(request, "fax-detail.html", context={'fax': fax})
+
+
+class NewFax(View):
+    def get(self, request):
+        form = OutboundFaxForm()
+        return render(request, "new-fax.html", context={'form': form})
+
+    def post(self, request):
+        form = OutboundFaxForm(request.POST, request.FILES, created_by=request.user)
+        if form.is_valid():
+            fax = form.save()
+            return redirect('dashboard:fax-detail', uuid=str(fax.uuid))
+        else:
+            return render(request, 'new-fax.html', context={'form': form})

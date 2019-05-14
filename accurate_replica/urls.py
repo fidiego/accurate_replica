@@ -39,7 +39,7 @@ urlpatterns = [
     url(r"^", include("social_django.urls", namespace="social")),
     url(r"^", include((auth_urlpatterns, "auth"))),
     # dashboard views
-    url("dashboard", include("dashboard.urls", namespace="dashboard")),
+    url("dashboard/", include("dashboard.urls", namespace="dashboard")),
     # favicon
     url(
         r"^favicon.ico$",
