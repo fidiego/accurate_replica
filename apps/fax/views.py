@@ -41,7 +41,7 @@ class FaxStatusCallback(View, GetRequestBody):
         fax = queryset.first()
         fax.status = body["Status"]
         fax.fax_status = body["FaxStatus"]
-        if body["ErrorMessage"]:
+        if body.get("ErrorMessage"):
             fax.error_message = body["ErrorMessage"]
         fax.save()
 
