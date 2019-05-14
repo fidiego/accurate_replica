@@ -66,13 +66,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # third party noise
-    "corsheaders",
-    "django_filters",
     "django_s3_storage",
     "raven.contrib.django.raven_compat",
-    "rest_framework",
     "social_django",
-    "webpack_loader",
     # our applications
     "core",
     "authentication",
