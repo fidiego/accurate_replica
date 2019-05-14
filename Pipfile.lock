@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bef8374036768888299a2b57f459f1617a427b574d02e5e1594d07b9da79855f"
+            "sha256": "395911177b5ca3359469167d13c856b2d21a1949770e953f726fa0d9992ea2dd"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,18 +39,18 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:bc6635529f85cf130813fda973a2a5240f54532c7e284b04f215dcee9721bbb8",
-                "sha256:d60329ff211a496016c334dbecf7ab70500b19aee013d2435b4f30d9e0a84ca1"
+                "sha256:a653dd7e155f0fb7d950cef7e2be7fa12b7787f4c8835f324abcfd1dbe4bb73d",
+                "sha256:f2054b788e19a2d91a3cc76814ca4e44050da7c89781a50924a132acf24fad56"
             ],
             "index": "pypi",
-            "version": "==1.9.146"
+            "version": "==1.9.147"
         },
         "botocore": {
             "hashes": [
-                "sha256:1517c52eaa3056d0e81f9a81b580d7f28440e7e1523d10a8acc8160c56be7113",
-                "sha256:19d9d56fcf4f16ffea8a929bbf3c72db3458b6c1f306c04031f3166759cd62ac"
+                "sha256:57d351535ffe0f19a80cb408df4dfc43fe66815cad3320e6a02d2261b498a8f6",
+                "sha256:e49db28173955bd3674b3280911446e6bd4458a9c40abfec46bf7c378fd30b2b"
             ],
-            "version": "==1.12.146"
+            "version": "==1.12.147"
         },
         "celery": {
             "hashes": [
@@ -144,14 +144,6 @@
             "index": "pypi",
             "version": "==0.8.0"
         },
-        "django-webpack-loader": {
-            "hashes": [
-                "sha256:60bab6b9a037a5346fad12d2a70a6bc046afb33154cf75ed640b93d3ebd5f520",
-                "sha256:970b968c2a8975fb7eff56a3bab5d0d90d396740852d1e0c50c5cfe2b824199a"
-            ],
-            "index": "pypi",
-            "version": "==0.6.0"
-        },
         "djangorestframework": {
             "hashes": [
                 "sha256:376f4b50340a46c15ae15ddd0c853085f4e66058f97e4dbe7d43ed62f5e60651",
@@ -173,20 +165,6 @@
                 "sha256:67045236dcfd6816dc439556d009594abf643e5eb48992e36beac09c2ca659b8"
             ],
             "version": "==0.17.1"
-        },
-        "geographiclib": {
-            "hashes": [
-                "sha256:635da648fce80a57b81b28875d103dacf7deb12a3f5f7387ba7d39c51e096533"
-            ],
-            "version": "==1.49"
-        },
-        "geopy": {
-            "hashes": [
-                "sha256:9b23b6f45fb3a60d3d5d6c17dd9c2321fec990bf43d21b1f01bfcc2f062b6dea",
-                "sha256:d2fc0dc79572f5acbcf7e48af1233ac8033079ddb15cae538b9dd03587436de5"
-            ],
-            "index": "pypi",
-            "version": "==1.19.0"
         },
         "gunicorn": {
             "hashes": [
