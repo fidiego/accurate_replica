@@ -1,2 +1,2 @@
-web: bin/start-nginx gunicorn accurate_replica.wsgi:application
+web: gunicorn accurate_replica.wsgi:application
 worker: celery worker --beat --app accurate_replica --loglevel info

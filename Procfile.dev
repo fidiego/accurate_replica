@@ -1,2 +1,2 @@
-web: bin/start-nginx gunicorn accurate_replica.wsgi:application --log-level warn --access-logfile - --error-logfile - --log-file - --reload -c gunicorn.conf
+web: gunicorn accurate_replica.wsgi:application --log-level warn --access-logfile - --error-logfile - --log-file - --reload # -c gunicorn.conf
 worker: celery worker --beat --app accurate_replica --loglevel info

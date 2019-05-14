@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block headscripts %}
+<style>
+#auth-error {
+    align-items: center;
+    background-color: #CC1F1A;
+    border: 10px solid #f3f3f3;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: Consolas,monaco,monospace;
+    height: 100vh;
+    justify-content: center;
+    padding: 2em;
+    text-align: center;
+    width: 100vw;
+}
+h1 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1.2rem;
+}
+ul.messages {
+    border: 3px solid #f3f3f3;
+    padding: 1.2rem;
+    list-style: none;
+}
+</style>
+{% endblock headscripts %}
+
+{% block content %}
+<div class="" id="auth-error">
+
+    <h1>
+        <span role="img">
+            ⚠️
+        </span>
+        <b>
+            Error: Authentication Failed
+        </b>
+    </h1>
+    <hr/>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    <hr/>
+    <div style="max-width: 600px; margin: 0 auto;">
+        <p>Looks like we've encountered an error while trying to log you in. You can try to log in again with the link below. But before you do, contact the admin to make sure you're registered. If this problem persists, reach out to your dashboard administrator.</p>
+        <hr/>
+        <hr/>
+
+        <p>Click <a href="{% url 'authentication:login' %}" style="text-decoration: none; color: #f4f4f4; border-bottom: 3px double"><b>here</b></a> to go back to the login page.</p>
+    </div>
+</div>
+{% endblock content %}
+
+{% block end_scripts %}
+<script>
+    (function() {
+        // clear local storage
+        console.log('clearing local storage')
+        localStorage.clear();
+        // clear session storage
+        console.log('clearing session storage')
+        sessionStorage.clear();
+        // clear cookies
+        console.log('clearing cookies')
+        var cookies = document.cookie.split(";");
+        document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+    })()
+</script>
+{% endblock end_scripts %}

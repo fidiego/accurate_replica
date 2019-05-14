@@ -73,7 +73,7 @@ redis:  # connect to redis instances defined in env
 
 .PHONY: ngrok
 ngrok:  # run ngrok
-	@ngrok http 5454 -subdomain=as-dev
+	@ngrok http 9901 -subdomain=ac-dev
 
 .PHONY: rmbytecode
 rmbytecode:  # remove all bytecode
