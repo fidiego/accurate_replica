@@ -1,3 +1,5 @@
+import logging
+
 from django.conf import settings
 from django import forms
 
@@ -6,18 +8,19 @@ from fax.models import Fax
 from fax.tasks import _send_fax
 
 
-class OutboundFaxForm(forms.ModelForm):
-    class Meta:
-        model = Fax
-        fields = ["_to", "content"]
+class OutboundFaxForm(forms.Form):
+    to = forms.CharField(max_length=17, label="to")
+    content = forms.FileField()
 
     def __init__(self, *args, **kwargs):
         self.created_by = kwargs.pop('created_by', None)
         super(OutboundFaxForm, self).__init__(*args, **kwargs)
 
-    def clean__to(self):
-        _to = self.cleaned_data['_to']
-        cleaned = e164_format_phone_number(_to)
+    def clean_to(self):
+        to = self.cleaned_data.get('to', '').strip()
+        if not to:
+            raise forms.ValidationError('Please provide a valid fax number.')
+        cleaned = e164_format_phone_number(to)
         return cleaned
 
     def clean_content(self):
@@ -26,14 +29,16 @@ class OutboundFaxForm(forms.ModelForm):
 
     def clean(self):
         super().clean()
+        logging.warning(self.cleaned_data)
 
-        _to = self.cleaned_data['_to']
-        if _to == settings.TWILIO_NUMBER:
+        to = self.cleaned_data['to']
+        if to == settings.TWILIO_NUMBER:
             raise forms.ValidationError('Sending fax to self is disallowed.')
         return self.cleaned_data
 
     def save(self):
         kwargs = self.cleaned_data
+        kwargs['_to'] = kwargs.pop('to')  # N.B. update to match the model field
         fax = Fax.objects.create(created_by=self.created_by, **kwargs)
         _send_fax.delay(fax.uuid)
         return fax

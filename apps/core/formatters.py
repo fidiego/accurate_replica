@@ -21,6 +21,7 @@ def e164_format_phone_number(value: str) -> str:
     """
     any number to E.164
     """
+    value = value.strip()
 
     # get only the digits out
     numbers = "".join([c for c in value if c.isdigit()])
