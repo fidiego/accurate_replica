@@ -9,6 +9,7 @@ from fax.models import Fax
 def _receive_fax(uuid):
     fax = Fax.objects.get(uuid=uuid)
     fax.receive_fax()
+    fax.send_notification_email()
 
 
 @shared_task

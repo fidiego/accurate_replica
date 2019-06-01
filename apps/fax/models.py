@@ -2,8 +2,10 @@ import logging
 from tempfile import NamedTemporaryFile
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.postgres.fields import JSONField
 from django.core.files import File
+from django.core.mail import send_mail
 from django.db import models
 from django.urls import reverse
 import requests
@@ -111,4 +113,15 @@ class Fax(BaseModelMixin):
             self.content.save(name, File(fp))
 
         # 2. remove the files from twilio
+
         return self.content.url
+
+    def send_notification_email(self):
+        users = get_user_model().objects.all()
+        fax_uri = settings.URL + reverse("dashboard:fax-detail", kwargs={'uuid': str(self.uuid)})
+        send_mail(
+            "New Fax - {self.short_id}",
+            "Hello,\nYou have received a fax.\n{fax_uri}\nBest,\nFax Bot",
+            f"no-reply@{settings.HOSTNAME}",
+            [u.email for u in users],
+        )
