@@ -118,10 +118,12 @@ class Fax(BaseModelMixin):
 
     def send_notification_email(self):
         users = get_user_model().objects.all()
-        fax_uri = settings.URL + reverse("dashboard:fax-detail", kwargs={'uuid': str(self.uuid)})
+        fax_uri = settings.URL + reverse(
+            "dashboard:fax-detail", kwargs={"uuid": str(self.uuid)}
+        )
         send_mail(
-            "New Fax - {self.short_id}",
-            "Hello,\nYou have received a fax.\n{fax_uri}\nBest,\nFax Bot",
+            f"New Fax - {self.short_id}",
+            f"Hello,\nYou have received a fax.\n{fax_uri}\nBest,\nFax Bot",
             f"no-reply@{settings.HOSTNAME}",
             [u.email for u in users],
         )
