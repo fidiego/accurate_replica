@@ -7,7 +7,7 @@ verify_ssl = true
 auth0-python = "*"
 boto3 = "*"
 celery = "*"
-django = ">=2.2.2"
+django = "==3.0.1"
 django-environ = "*"
 django-s3-storage = "*"
 django-sendgrid-v5 = "*"
