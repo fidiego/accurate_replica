@@ -1,4 +1,6 @@
 import logging
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
@@ -16,19 +18,19 @@ class DashboardHomeRedirectView(View):
         return redirect("authentication:login")
 
 
-class Home(View):
+class Home(LoginRequiredMixin, View):
     def get(self, request):
         faxes = Fax.objects.all().order_by('-created_on')
         return render(request, "home.html", context={'faxes': faxes})
 
 
-class FaxDetail(View):
+class FaxDetail(LoginRequiredMixin, View):
     def get(self, request, uuid):
         fax = Fax.objects.get(uuid=uuid)
         return render(request, "fax-detail.html", context={'fax': fax})
 
 
-class NewFax(View):
+class NewFax(LoginRequiredMixin, View):
     def get(self, request):
         form = OutboundFaxForm()
         return render(request, "new-fax.html", context={'form': form})
